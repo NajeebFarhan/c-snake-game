@@ -3,5 +3,6 @@
         "terminal_io.h": "c",
         "select.h": "c",
         "test.h": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

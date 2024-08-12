@@ -7,6 +7,7 @@
 #define COLS 60
 
 void renderfield();
+void keepbound();
 
 int xpos = 0;
 int ypos = 0;
@@ -23,15 +24,21 @@ int main()
     //! something wrong with this thing, just let be commented for eternity
     // fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // Make stdin non-blocking
 
+    printf("Press q to quite\n");
+
     while (key != 'q')
     {
+        keepbound();
         renderfield();
 
-        // Move cursor back to top
+        // Move cursor back to top for rerendering
         printf("\e[%iA", ROWS + 2);
 
-        // usleep(50000);
+        // For faster rendering
+        fflush(stdout);
 
+        // for some delay or shet go zoom
+        usleep(20000);
         if (key_pressed())
         {
             key = getchar();
@@ -62,8 +69,6 @@ int main()
     // Clear screen
     printf("\e[2J\e[H");
 
-    fflush(stdin);
-
     return 0;
 }
 
@@ -93,4 +98,24 @@ void renderfield()
     printf("\n");
 
     // printf("\e[%iA", ROWS + 3);
+}
+
+void keepbound()
+{
+    if (xpos > COLS - 1)
+    {
+        xpos = 0;
+    }
+    if (xpos < 0)
+    {
+        xpos = COLS - 1;
+    }
+    if (ypos > ROWS - 1)
+    {
+        ypos = 0;
+    }
+    if (ypos < 0)
+    {
+        ypos = ROWS - 1;
+    }
 }
