@@ -25,7 +25,7 @@ void resetTermios()
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 }
 
-int kbhit(void)
+int key_pressed(void)
 {
     struct timeval tv;
     tv.tv_sec = 0;

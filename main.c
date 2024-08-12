@@ -32,7 +32,7 @@ int main()
 
         // usleep(50000);
 
-        if (kbhit())
+        if (key_pressed())
         {
             key = getchar();
 
@@ -61,6 +61,8 @@ int main()
     resetTermios(); // Restore terminal settings
     // Clear screen
     printf("\e[2J\e[H");
+
+    fflush(stdin);
 
     return 0;
 }
