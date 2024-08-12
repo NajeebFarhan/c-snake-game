@@ -21,7 +21,7 @@ int main()
 
     initTermios(0); // Initialize with no echo
 
-    //! something wrong with this thing, just let be commented for eternity
+    //! something wrong with this thing, just let it be commented for eternity
     // fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // Make stdin non-blocking
 
     printf("Press q to quite\n");
