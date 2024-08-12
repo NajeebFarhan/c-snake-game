@@ -1,3 +1,5 @@
-# realtime-c-terminal-io-
+# C snake game
 
-Mostly generated using ChatGPT
+A practice C program
+It is still under development
+made using my own [custom header](https://github.com/NajeebFarhan/realtime-c-terminal-io-)
