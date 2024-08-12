@@ -14,15 +14,17 @@ int main()
 
     char key;
 
-    initTermios(0);                           // Initialize with no echo
-    fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // Make stdin non-blocking
+    initTermios(0); // Initialize with no echo
+
+    //! something wrong with this thing, just let be commented for eternity
+    // fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // Make stdin non-blocking
 
     do
     {
         renderfield();
 
         // Move cursor back to top
-        printf("\e[%iA", ROWS + 10);
+        printf("\e[%iA", ROWS + 2);
 
         if (kbhit())
         {
@@ -36,7 +38,7 @@ int main()
     printf("\e[?25h");
     resetTermios(); // Restore terminal settings
     // Clear screen
-    // printf("\e[2J\e[H");
+    printf("\e[2J\e[H");
 
     return 0;
 }
