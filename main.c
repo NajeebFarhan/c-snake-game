@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "terminal_io.h"
 
@@ -6,6 +7,9 @@
 #define COLS 60
 
 void renderfield();
+
+int xpos = 0;
+int ypos = 0;
 
 int main()
 {
@@ -19,20 +23,38 @@ int main()
     //! something wrong with this thing, just let be commented for eternity
     // fcntl(STDIN_FILENO, F_SETFL, O_NONBLOCK); // Make stdin non-blocking
 
-    do
+    while (key != 'q')
     {
         renderfield();
 
         // Move cursor back to top
         printf("\e[%iA", ROWS + 2);
 
+        // usleep(50000);
+
         if (kbhit())
         {
             key = getchar();
-            if (key == 'q')
+
+            switch (key)
+            {
+            case 'w':
+                ypos--;
                 break;
+            case 's':
+                ypos++;
+                break;
+            case 'a':
+                xpos--;
+                break;
+            case 'd':
+                xpos++;
+                break;
+            default:
+                break;
+            }
         }
-    } while (1);
+    };
 
     // Show cursor
     printf("\e[?25h");
@@ -53,7 +75,14 @@ void renderfield()
     {
         printf("|");
         for (int j = 0; j < COLS; j++)
-            printf(".");
+        {
+            if (i == ypos && j == xpos)
+            {
+                printf("O");
+            }
+            else
+                printf(".");
+        }
         printf("|\n");
     }
 
