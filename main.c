@@ -8,6 +8,7 @@
 
 void renderfield();
 void keepbound();
+void controls(char key);
 
 int xpos = 0;
 int ypos = 0;
@@ -28,7 +29,6 @@ int main()
 
     while (key != 'q')
     {
-        keepbound();
         renderfield();
 
         // Move cursor back to top for rerendering
@@ -43,23 +43,8 @@ int main()
         {
             key = getchar();
 
-            switch (key)
-            {
-            case 'w':
-                ypos--;
-                break;
-            case 's':
-                ypos++;
-                break;
-            case 'a':
-                xpos--;
-                break;
-            case 'd':
-                xpos++;
-                break;
-            default:
-                break;
-            }
+            // Controlling the player entity
+            controls(key);
         }
     };
 
@@ -97,7 +82,7 @@ void renderfield()
         printf("-");
     printf("\n");
 
-    // printf("\e[%iA", ROWS + 3);
+    keepbound();
 }
 
 void keepbound()
@@ -117,5 +102,26 @@ void keepbound()
     if (ypos < 0)
     {
         ypos = ROWS - 1;
+    }
+}
+
+void controls(char key)
+{
+    switch (key)
+    {
+    case 'w':
+        ypos--;
+        break;
+    case 's':
+        ypos++;
+        break;
+    case 'a':
+        xpos--;
+        break;
+    case 'd':
+        xpos++;
+        break;
+    default:
+        break;
     }
 }
