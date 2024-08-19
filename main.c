@@ -12,6 +12,8 @@ void controls(char key);
 
 int xpos = 0;
 int ypos = 0;
+int xspeed = 1;
+int yspeed = 0;
 
 int main()
 {
@@ -38,7 +40,6 @@ int main()
         fflush(stdout);
 
         // for some delay or shet go zoom
-        usleep(20000);
         if (key_pressed())
         {
             key = getchar();
@@ -46,6 +47,10 @@ int main()
             // Controlling the player entity
             controls(key);
         }
+
+        usleep(150000);
+        xpos += xspeed;
+        ypos += yspeed;
     };
 
     // Show cursor
@@ -110,16 +115,20 @@ void controls(char key)
     switch (key)
     {
     case 'w':
-        ypos--;
+        yspeed = -1;
+        xspeed = 0;
         break;
     case 's':
-        ypos++;
+        yspeed = 1;
+        xspeed = 0;
         break;
     case 'a':
-        xpos--;
+        yspeed = 0;
+        xspeed = -1;
         break;
     case 'd':
-        xpos++;
+        yspeed = 0;
+        xspeed = 1;
         break;
     default:
         break;
